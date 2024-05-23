@@ -27,7 +27,7 @@ const getValue = function (e) {
         ageInput.value = '';
 
         render();
-    } 
+    }
 }
 
 const render = function () {
@@ -49,9 +49,16 @@ const render = function () {
 const deleteItem = function (e) {
     if (e.target.classList.contains("bi-trash3-fill")) {
         const itemToDelete = e.target.closest('li');
+        const index = Array.from(itemToDelete.parentNode.children).indexOf(itemToDelete);
+
         itemToDelete.remove();
+        std.splice(index, 1);
+        localStorage.setItem('std', JSON.stringify(std));
+
+        render();
     }
 }
+
 
 form.addEventListener('submit', getValue);
 list.addEventListener('click', deleteItem);
